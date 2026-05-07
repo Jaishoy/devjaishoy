@@ -1,65 +1,146 @@
-import Image from "next/image";
+import Link from 'next/link'
+import { createClient } from '@/lib/supabase/server'
 
-export default function Home() {
+const stack = [
+  'Next.js', 'Vite JS','Vue.js', 'React', 'TypeScript', 'Tailwind CSS',
+  'Supabase', 'PostgreSQL', 'Node.js', 'Git', 'more...'
+]
+
+export default async function HomePage() {
+  const supabase = await createClient()
+
+  const { data: featured } = await supabase
+    .from('portfolios')
+    .select('id, title, description, cover_url, tags')
+    .order('created_at', { ascending: false })
+    .limit(3)
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+    <div className="min-h-screen bg-zinc-950">
+
+      {/* Hero */}
+      <section className="max-w-5xl mx-auto px-6 pt-24 pb-20">
+        <p className="text-zinc-500 text-sm mb-3 tracking-wide">Full-stack Developer & Freelancer</p>
+        <h1 className="text-4xl md:text-5xl font-semibold text-zinc-100 leading-tight mb-5">
+          สวัสดีครับ ผม<span className="text-white"> devjaishoy</span>
+          <br className="hidden md:block" />
+          <span className="text-zinc-400"> รับทำเว็บไซต์ครบวงจร</span>
+        </h1>
+        <p className="text-zinc-400 text-base leading-relaxed max-w-xl mb-8">
+          Lorem ipsum dolor sit amet consectetur. Amet lectus donec nulla nibh turpis
+          nunc risus amet sit. Velit urna consequat lorem amet.
+        </p>
+        <div className="flex flex-wrap gap-3">
+          <Link
+            href="/chat"
+            className="bg-white text-zinc-900 font-medium text-sm rounded-lg px-5 py-2.5 hover:bg-zinc-100 transition"
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+            ติดต่อจ้างงาน
+          </Link>
+          <Link
+            href="/portfolio"
+            className="text-zinc-300 border border-zinc-700 text-sm rounded-lg px-5 py-2.5 hover:border-zinc-500 hover:text-white transition"
           >
-            Documentation
-          </a>
+            ดูผลงาน
+          </Link>
         </div>
-      </main>
+      </section>
+
+      {/* Stack */}
+      <section className="max-w-5xl mx-auto px-6 pb-20">
+        <p className="text-xs text-zinc-600 uppercase tracking-widest mb-4">Tech Stack</p>
+        <div className="flex flex-wrap gap-2">
+          {stack.map(s => (
+            <span
+              key={s}
+              className="text-xs text-zinc-400 border border-zinc-800 rounded-full px-3 py-1.5"
+            >
+              {s}
+            </span>
+          ))}
+        </div>
+      </section>
+
+      {/* Featured Portfolio */}
+      <section className="max-w-5xl mx-auto px-6 pb-20">
+        <div className="flex items-center justify-between mb-6">
+          <p className="text-xs text-zinc-600 uppercase tracking-widest">Featured work</p>
+          <Link
+            href="/portfolio"
+            className="text-xs text-zinc-500 hover:text-zinc-300 transition"
+          >
+            ดูทั้งหมด →
+          </Link>
+        </div>
+
+        {!featured || featured.length === 0 ? (
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {[1, 2, 3].map(i => (
+              <div key={i} className="bg-zinc-900 border border-zinc-800 rounded-xl overflow-hidden">
+                <div className="w-full h-40 bg-zinc-800 animate-pulse" />
+                <div className="p-4 space-y-2">
+                  <div className="h-4 bg-zinc-800 rounded animate-pulse w-3/4" />
+                  <div className="h-3 bg-zinc-800 rounded animate-pulse w-full" />
+                </div>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {featured.map(item => (
+              <Link
+                key={item.id}
+                href="/portfolio"
+                className="group bg-zinc-900 border border-zinc-800 rounded-xl overflow-hidden hover:border-zinc-600 transition"
+              >
+                {item.cover_url ? (
+                  <img
+                    src={item.cover_url}
+                    alt={item.title}
+                    className="w-full h-40 object-cover group-hover:opacity-90 transition"
+                  />
+                ) : (
+                  <div className="w-full h-40 bg-zinc-800 flex items-center justify-center">
+                    <span className="text-zinc-600 text-xs">No image</span>
+                  </div>
+                )}
+                <div className="p-4">
+                  <h3 className="text-zinc-100 text-sm font-medium mb-1">{item.title}</h3>
+                  <p className="text-zinc-500 text-xs leading-relaxed line-clamp-2">
+                    {item.description}
+                  </p>
+                  {item.tags?.length > 0 && (
+                    <div className="flex flex-wrap gap-1 mt-3">
+                      {item.tags.slice(0, 3).map((tag: string) => (
+                        <span key={tag} className="text-xs text-zinc-500 bg-zinc-800 px-2 py-0.5 rounded-full">
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              </Link>
+            ))}
+          </div>
+        )}
+      </section>
+
+      {/* CTA */}
+      <section className="max-w-5xl mx-auto px-6 pb-24">
+        <div className="bg-zinc-900 border border-zinc-800 rounded-2xl px-8 py-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+          <div>
+            <h2 className="text-zinc-100 font-medium text-lg mb-1">มีโปรเจกต์ในใจแล้วใช่ไหมครับ?</h2>
+            <p className="text-zinc-500 text-sm">ปรึกษาฟรี ไม่มีค่าใช้จ่ายในการสอบถามครับ</p>
+          </div>
+          <Link
+            href="/chat"
+            className="shrink-0 bg-white text-zinc-900 font-medium text-sm rounded-lg px-6 py-2.5 hover:bg-zinc-100 transition"
+          >
+            เริ่มคุยได้เลย →
+          </Link>
+        </div>
+      </section>
+
     </div>
-  );
+  )
 }
