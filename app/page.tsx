@@ -22,9 +22,9 @@ export default async function HomePage() {
       <section className="max-w-5xl mx-auto px-6 pt-24 pb-20">
         <p className="text-zinc-500 text-sm mb-3 tracking-wide">Full-stack Developer & Freelancer</p>
         <h1 className="text-4xl md:text-5xl font-semibold text-zinc-100 leading-tight mb-5">
-          สวัสดีครับ ผม<span className="text-white"> devjaishoy</span>
+          Hello I'm <span className="text-white">devjaishoy</span>
           <br className="hidden md:block" />
-          <span className="text-zinc-400"> รับทำเว็บไซต์ครบวงจร</span>
+          <span className="text-zinc-400"> Welcome to my webpage!</span>
         </h1>
         <p className="text-zinc-400 text-base leading-relaxed max-w-xl mb-8">
           Lorem ipsum dolor sit amet consectetur. Amet lectus donec nulla nibh turpis
