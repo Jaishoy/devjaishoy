@@ -3,14 +3,19 @@ import { createAdminClient } from '@/lib/supabase/admin'
 import PortfolioForm from '@/app/admin/_components/PortfolioForm'
 import { notFound } from 'next/navigation'
 
-export default async function EditPortfolioPage({ params }: { params: { id: string } }) {
+export default async function EditPortfolioPage({
+  params,
+}: {
+  params: Promise<{ id: string }>
+}) {
+  const { id } = await params
   await requireAdmin()
   const adminClient = createAdminClient()
 
   const { data } = await adminClient
     .from('portfolios')
     .select('*')
-    .eq('id', params.id)
+    .eq('id', id)
     .single()
 
   if (!data) notFound()

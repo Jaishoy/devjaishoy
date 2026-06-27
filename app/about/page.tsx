@@ -61,8 +61,12 @@ export default function AboutPage() {
 
         {/* Bio */}
         <div className="flex flex-col sm:flex-row gap-6 items-start mb-14">
-          <div className="w-16 h-16 rounded-full bg-zinc-800 border border-zinc-700 flex items-center justify-center shrink-0 text-zinc-500 text-lg font-medium">
-            <img src="DevJaishoyLogo.png" alt="DevJaishoy" />
+          <div className="w-16 h-16 rounded-full bg-zinc-800 border border-zinc-700 flex items-center justify-center shrink-0 text-zinc-500 text-lg font-medium overflow-hidden">
+            <img
+              src="DevJaishoyLogo.png"
+              alt="DevJaishoy"
+              className="w-full h-full object-cover"
+            />
           </div>
           <div>
             <h1 className="text-2xl font-semibold text-zinc-100 mb-1">devjaishoy</h1>

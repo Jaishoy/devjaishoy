@@ -3,27 +3,25 @@ import { createAdminClient } from '@/lib/supabase/admin'
 import ChatBox from '@/app/chat/_components/ChatBox'
 
 // 1. ปรับ Type ของ params ให้เป็น Promise
-export default async function AdminChatPage({ 
-  params 
-}: { 
-  params: Promise<{ id: string }> 
+export default async function AdminChatPage({
+  params,
+}: {
+  params: Promise<{ id: string }>
 }) {
-  // 2. Unwrapped params ด้วย await
   const { id } = await params
-  
   const admin = await requireAdmin()
   const adminClient = createAdminClient()
 
   const { data: conversation } = await adminClient
     .from('conversations')
     .select('*, users(username, email)')
-    .eq('id', id) // ใช้ id ที่ await มาแล้ว
+    .eq('id', id)
     .single()
 
   const { data: messages } = await adminClient
     .from('messages')
     .select('*')
-    .eq('conversation_id', id) // ใช้ id ที่ await มาแล้ว
+    .eq('conversation_id', id)
     .order('created_at', { ascending: true })
 
   return (

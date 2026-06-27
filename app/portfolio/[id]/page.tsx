@@ -3,16 +3,19 @@ import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import PortfolioGallery from '../_components/PortfolioGallery'
 
-export default async function PortfolioDetailPage({ params }: { params: { id: string } }) {
+export default async function PortfolioDetailPage({
+    params,
+}: {
+    params: Promise<{ id: string }>
+}) {
+    const { id } = await params
     const supabase = await createClient()
 
     const { data: item } = await supabase
         .from('portfolios')
         .select('*')
-        .eq('id', params.id)
+        .eq('id', id)
         .single()
-
-    if (!item) notFound()
 
     return (
         <div className="min-h-screen bg-zinc-950">
