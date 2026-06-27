@@ -2,7 +2,7 @@ import Link from 'next/link'
 import { createClient } from '@/lib/supabase/server'
 
 const stack = [
-  'Next.js', 'Vite JS','Vue.js', 'React', 'TypeScript', 'Tailwind CSS',
+  'Next.js', 'Vite JS', 'Vue.js', 'React', 'TypeScript', 'Tailwind CSS',
   'Supabase', 'PostgreSQL', 'Node.js', 'Git', 'more...'
 ]
 
@@ -27,8 +27,7 @@ export default async function HomePage() {
           <span className="text-zinc-400"> Welcome to my webpage!</span>
         </h1>
         <p className="text-zinc-400 text-base leading-relaxed max-w-xl mb-8">
-          Lorem ipsum dolor sit amet consectetur. Amet lectus donec nulla nibh turpis
-          nunc risus amet sit. Velit urna consequat lorem amet.
+          I’m DevJaishoy or you can call me ja. I’m full stack developer who will create your website application.You can select option designer front-end back-end or everything here!
         </p>
         <div className="flex flex-wrap gap-3">
           <Link
@@ -64,7 +63,7 @@ export default async function HomePage() {
       {/* Featured Portfolio */}
       <section className="max-w-5xl mx-auto px-6 pb-20">
         <div className="flex items-center justify-between mb-6">
-          <p className="text-xs text-zinc-600 uppercase tracking-widest">Featured work</p>
+          <p className="text-xs text-zinc-600 uppercase tracking-widest">Portfolio Examples</p>
           <Link
             href="/portfolio"
             className="text-xs text-zinc-500 hover:text-zinc-300 transition"
@@ -90,7 +89,7 @@ export default async function HomePage() {
             {featured.map(item => (
               <Link
                 key={item.id}
-                href="/portfolio"
+                href={`/portfolio/${item.id}`}
                 className="group bg-zinc-900 border border-zinc-800 rounded-xl overflow-hidden hover:border-zinc-600 transition"
               >
                 {item.cover_url ? (
