@@ -129,8 +129,8 @@ export default async function HomePage() {
       <section className="max-w-5xl mx-auto px-6 pb-24">
         <div className="bg-zinc-900 border border-zinc-800 rounded-2xl px-8 py-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
           <div>
-            <h2 className="text-zinc-100 font-medium text-lg mb-1">มีโปรเจกต์ในใจแล้วใช่ไหมครับ?</h2>
-            <p className="text-zinc-500 text-sm">ปรึกษาฟรี ไม่มีค่าใช้จ่ายในการสอบถามครับ</p>
+            <h2 className="text-zinc-100 font-medium text-lg mb-1">"Do you have a project in mind?"</h2>
+            <p className="text-zinc-500 text-sm">Get free consultation - no cost for inquiry</p>
           </div>
           <Link
             href="/chat"
