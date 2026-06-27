@@ -1,7 +1,0 @@
-GOOGLE
-    Callback URL (for OAuth) : https://ziftifybyjlhdcddlcxy.supabase.co/auth/v1/callback
-    Client ID : 286165390832-c4tlf5b2v02i1t7vumo5gdlfabnvuhj9.apps.googleusercontent.com
-    Client secret : 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
-GITHUB
-    Client ID : Ov23lipUAV0BIi1bhB3l
-    Client secret : 07371bbb3b6c0bd1ee2e5b1d87c91e7e7e937d8c
