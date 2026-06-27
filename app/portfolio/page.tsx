@@ -1,5 +1,6 @@
 import { createClient } from '@/lib/supabase/server'
 import Link from 'next/link'
+import ExternalLinkButton from './_components/ExternalLinkButton'
 
 export default async function PortfolioPage({
   searchParams,
@@ -89,17 +90,7 @@ export default async function PortfolioPage({
                 <div className="p-5">
                   <div className="flex items-start justify-between gap-3 mb-2">
                     <h2 className="text-zinc-100 font-medium text-base">{item.title}</h2>
-                    {item.url && (
-                      <a
-                        href={item.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        onClick={(e) => e.stopPropagation()}
-                        className="shrink-0 text-zinc-500 hover:text-zinc-300 transition text-xs border border-zinc-700 rounded-lg px-2.5 py-1 hover:border-zinc-500"
-                      >
-                        ดูโปรเจกต์ ↗
-                      </a>
-                    )}
+                    {item.url && <ExternalLinkButton href={item.url} />}
                   </div>
                   <p className="text-zinc-500 text-sm leading-relaxed mb-4 line-clamp-2">
                     {item.description}
