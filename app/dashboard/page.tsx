@@ -1,6 +1,7 @@
 import { getProfile } from '@/lib/user'
 import { createClient } from '@/lib/supabase/server'
 import { redirect } from 'next/navigation'
+import Link from 'next/link'
 
 export default async function DashboardPage() {
   const profile = await getProfile()
@@ -38,12 +39,12 @@ export default async function DashboardPage() {
         </div>
 
         <form action={signOut}>
-          <link
+          <Link
             href="/dashboard/profile"
             className="w-full mt-2 border border-zinc-700 text-zinc-400 rounded-lg py-2 text-sm hover:bg-zinc-800 hover:text-zinc-200 transition text-center block"
           >
             แก้ไขข้อมูลส่วนตัว
-          </link>
+          </Link>
           <button
             type="submit"
             className="w-full mt-2 border border-zinc-700 text-zinc-400 rounded-lg py-2 text-sm hover:bg-zinc-800 hover:text-zinc-200 transition"
