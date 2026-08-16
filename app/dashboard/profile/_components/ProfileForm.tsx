@@ -3,6 +3,7 @@
 import { createClient } from '@/lib/supabase/client'
 import { useState } from 'react'
 import type { UserProfile } from '@/lib/user'
+import { useRouter } from 'next/navigation'
 
 type ExtendedProfile = UserProfile & {
   company_name?: string | null
@@ -13,6 +14,7 @@ type ExtendedProfile = UserProfile & {
 
 export default function ProfileForm({ profile }: { profile: ExtendedProfile }) {
   const supabase = createClient()
+  const router = useRouter()
 
   const [username, setUsername] = useState(profile.username ?? '')
   const [companyName, setCompanyName] = useState(profile.company_name ?? '')
@@ -43,8 +45,8 @@ export default function ProfileForm({ profile }: { profile: ExtendedProfile }) {
       setError(error.message)
     } else {
       setSuccess(true)
+      router.push('/dashboard')
     }
-    setLoading(false)
   }
 
   const fields = [
