@@ -28,13 +28,25 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
-    >
-      <body className="min-h-full flex flex-col">
+    <html lang="th">
+      <body className="bg-zinc-950 text-zinc-100 antialiased">
         <Navbar />
-        {children}
+        <main className="pt-[60px]">
+          {children}
+        </main>
+        <footer className="border-t border-zinc-900 py-8 mt-auto">
+          <div className="max-w-5xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <p className="text-zinc-600 text-xs">© 2025 devjaishoy. All rights reserved.</p>
+            <div className="flex items-center gap-5">
+              <a href="/privacy" className="text-zinc-600 hover:text-zinc-400 text-xs transition">
+                Privacy Policy
+              </a>
+              <a href="/chat" className="text-zinc-600 hover:text-zinc-400 text-xs transition">
+                Contact
+              </a>
+            </div>
+          </div>
+        </footer>
       </body>
     </html>
   );
