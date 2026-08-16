@@ -25,8 +25,8 @@ export default async function AdminChatPage({
     .order('created_at', { ascending: true })
 
   return (
-    <div className="min-h-screen bg-zinc-950 flex flex-col">
-      <div className="border-b border-zinc-800 px-6 py-4">
+    <div className="h-screen bg-zinc-950 flex flex-col overflow-hidden">
+      <div className="border-b border-zinc-800 px-6 py-4 shrink-0">
         <p className="text-xs text-zinc-500 uppercase tracking-widest mb-0.5">conversation with</p>
         <h1 className="text-zinc-100 font-semibold">{conversation?.users?.username}</h1>
         <p className="text-zinc-500 text-sm">{conversation?.users?.email}</p>

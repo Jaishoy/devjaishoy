@@ -28,8 +28,8 @@ export default async function ChatPage() {
     .order('created_at', { ascending: true })
 
   return (
-    <div className="min-h-screen bg-zinc-950 flex flex-col">
-      <div className="border-b border-zinc-800 px-6 py-4">
+    <div className="h-screen bg-zinc-950 flex flex-col overflow-hidden">
+      <div className="border-b border-zinc-800 px-6 py-4 shrink-0">
         <h1 className="text-zinc-100 font-semibold">ติดต่อ Admin</h1>
         <p className="text-zinc-500 text-sm">ส่งข้อความถึงเราได้เลยครับ</p>
       </div>

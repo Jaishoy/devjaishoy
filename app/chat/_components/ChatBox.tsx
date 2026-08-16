@@ -145,8 +145,8 @@ export default function ChatBox({ conversationId, initialMessages, currentUserId
   const canSend = (input.trim().length > 0 || files.length > 0) && !sending
 
   return (
-    <div className="flex flex-col flex-1 max-w-2xl w-full mx-auto h-[calc(100vh-73px)]">
-      {/* Messages */}
+    <div className="flex flex-col flex-1 overflow-hidden">
+      {/* Messages — scroll ได้ */}
       <div className="flex-1 overflow-y-auto px-4 py-6 space-y-3">
         {messages.length === 0 && (
           <p className="text-center text-zinc-600 text-sm">
@@ -165,21 +165,17 @@ export default function ChatBox({ conversationId, initialMessages, currentUserId
 
       {/* Error */}
       {error && (
-        <p className="px-4 py-2 text-sm text-red-400 bg-red-950/40 border-t border-red-900">
+        <p className="px-4 py-2 text-sm text-red-400 bg-red-950/40 border-t border-red-900 shrink-0">
           {error}
         </p>
       )}
 
       {/* Image previews */}
       {previews.length > 0 && (
-        <div className="flex gap-2 px-4 py-3 border-t border-zinc-800 flex-wrap">
+        <div className="flex gap-2 px-4 py-3 border-t border-zinc-800 flex-wrap shrink-0">
           {previews.map((src, i) => (
             <div key={i} className="relative group">
-              <img
-                src={src}
-                alt=""
-                className="w-20 h-20 object-cover rounded-lg border border-zinc-700"
-              />
+              <img src={src} alt="" className="w-20 h-20 object-cover rounded-lg border border-zinc-700" />
               <button
                 onClick={() => removeFile(i)}
                 className="absolute -top-1.5 -right-1.5 w-5 h-5 bg-zinc-900 border border-zinc-600 rounded-full text-zinc-400 hover:text-white text-xs flex items-center justify-center"
@@ -191,17 +187,16 @@ export default function ChatBox({ conversationId, initialMessages, currentUserId
         </div>
       )}
 
-      {/* Input area */}
-      <div className="border-t border-zinc-800 p-4 flex gap-3 items-end">
-        {/* Upload button */}
+      {/* Input — ติดล่างเสมอ */}
+      <div className="border-t border-zinc-800 p-4 flex gap-3 items-end shrink-0">
         <button
           onClick={() => fileInputRef.current?.click()}
           className="shrink-0 w-10 h-10 flex items-center justify-center rounded-xl border border-zinc-700 text-zinc-400 hover:bg-zinc-800 hover:text-zinc-200 transition"
           title="แนบรูป"
         >
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/>
-            <polyline points="21 15 16 10 5 21"/>
+            <rect x="3" y="3" width="18" height="18" rx="2" /><circle cx="8.5" cy="8.5" r="1.5" />
+            <polyline points="21 15 16 10 5 21" />
           </svg>
         </button>
         <input
@@ -212,7 +207,6 @@ export default function ChatBox({ conversationId, initialMessages, currentUserId
           className="hidden"
           onChange={handleFileChange}
         />
-
         <textarea
           value={input}
           onChange={e => setInput(e.target.value)}
@@ -221,7 +215,6 @@ export default function ChatBox({ conversationId, initialMessages, currentUserId
           rows={1}
           className="flex-1 bg-zinc-800 border border-zinc-700 text-zinc-100 placeholder-zinc-500 rounded-xl px-4 py-2.5 text-sm outline-none focus:ring-2 focus:ring-zinc-500 resize-none"
         />
-
         <button
           onClick={sendMessage}
           disabled={!canSend}

@@ -63,9 +63,9 @@ export default function AboutPage() {
         <div className="flex flex-col sm:flex-row gap-6 items-start mb-14">
           <div className="w-16 h-16 rounded-full bg-zinc-800 border border-zinc-700 flex items-center justify-center shrink-0 text-zinc-500 text-lg font-medium overflow-hidden">
             <img
-              src="DevJaishoyLogo.png"
-              alt="DevJaishoy"
-              className="w-full h-full object-cover"
+              src="/portfolio.webp"
+              alt="devjaishoy"
+              className="w-20 h-20 rounded-full object-cover border-2 border-zinc-700 shrink-0"
             />
           </div>
           <div>

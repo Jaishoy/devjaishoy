@@ -15,17 +15,7 @@ export async function GET(request: NextRequest) {
     console.log('exchange error:', error?.message ?? 'none')
 
     if (!error) {
-      // ✅ ต้องใช้ NextResponse.redirect และส่ง cookie กลับไปด้วย
-      const forwardedHost = request.headers.get('x-forwarded-host')
-      const isLocalEnv = process.env.NODE_ENV === 'development'
-
-      if (isLocalEnv) {
-        return NextResponse.redirect(`${origin}${next}`)
-      } else if (forwardedHost) {
-        return NextResponse.redirect(`https://${forwardedHost}${next}`)
-      } else {
-        return NextResponse.redirect(`${origin}${next}`)
-      }
+      return NextResponse.redirect(`${origin}${next}`)
     }
   }
 

@@ -19,6 +19,26 @@ export default function MessageBubble({ message, isOwn }: Props) {
   const hasText = message.content.length > 0
   const hasImages = message.image_urls.length > 0
 
+  function linkify(text: string) {
+    const urlRegex = /(https?:\/\/[^\s]+)/g
+    const parts = text.split(urlRegex)
+    return parts.map((part, i) =>
+      urlRegex.test(part) ? (
+        <a
+          key={i}
+          href={part}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="underline underline-offset-2 hover:opacity-80 transition break-all"
+        >
+          {part}
+        </a >
+      ) : (
+        <span key={i}>{part}</span>
+      )
+    )
+  }
+
   return (
     <>
       <div className={`flex ${isOwn ? 'justify-end' : 'justify-start'}`}>
@@ -41,12 +61,11 @@ export default function MessageBubble({ message, isOwn }: Props) {
 
           {/* Text bubble */}
           {hasText && (
-            <div className={`px-4 py-2.5 rounded-2xl text-sm leading-relaxed ${
-              isOwn
-                ? 'bg-white text-zinc-900 rounded-br-sm'
-                : 'bg-zinc-800 text-zinc-100 rounded-bl-sm'
-            }`}>
-              {message.content}
+            <div className={`px-4 py-2.5 rounded-2xl text-sm leading-relaxed ${isOwn
+              ? 'bg-white text-zinc-900 rounded-br-sm'
+              : 'bg-zinc-800 text-zinc-100 rounded-bl-sm'
+              }`}>
+              {linkify(message.content)}
             </div>
           )}
 

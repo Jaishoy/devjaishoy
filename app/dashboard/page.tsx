@@ -38,6 +38,12 @@ export default async function DashboardPage() {
         </div>
 
         <form action={signOut}>
+          <link
+            href="/dashboard/profile"
+            className="w-full mt-2 border border-zinc-700 text-zinc-400 rounded-lg py-2 text-sm hover:bg-zinc-800 hover:text-zinc-200 transition text-center block"
+          >
+            แก้ไขข้อมูลส่วนตัว
+          </link>
           <button
             type="submit"
             className="w-full mt-2 border border-zinc-700 text-zinc-400 rounded-lg py-2 text-sm hover:bg-zinc-800 hover:text-zinc-200 transition"

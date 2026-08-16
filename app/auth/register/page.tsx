@@ -20,7 +20,7 @@ export default function RegisterPage() {
       password,
       options: {
         data: { username },
-        emailRedirectTo: `${location.origin}/auth/callback?next=/dashboard`,
+        emailRedirectTo: `${window.location.origin}/auth/callback?next=/dashboard`,
       },
     })
     if (error) {
@@ -37,7 +37,7 @@ export default function RegisterPage() {
         <div className="w-full max-w-md bg-zinc-900 border border-zinc-800 rounded-2xl shadow-xl p-8 text-center space-y-3">
           <div className="w-12 h-12 rounded-full bg-green-950 border border-green-800 flex items-center justify-center mx-auto">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#4ade80" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-              <polyline points="20 6 9 17 4 12"/>
+              <polyline points="20 6 9 17 4 12" />
             </svg>
           </div>
           <h2 className="text-xl font-semibold text-zinc-100">ยืนยัน Email ของคุณ</h2>
