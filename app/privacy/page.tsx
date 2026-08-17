@@ -1,5 +1,5 @@
 export default function PrivacyPage() {
-  const lastUpdated = '16 สิงหาคม 2568'
+  const lastUpdated = '17 สิงหาคม 2568'
 
   return (
     <div className="min-h-screen bg-zinc-950">
