@@ -37,6 +37,7 @@ export default async function ChatPage() {
         conversationId={conversation!.id}
         initialMessages={messages ?? []}
         currentUserId={profile.uid}
+        isAdmin={false}
       />
     </div>
   )

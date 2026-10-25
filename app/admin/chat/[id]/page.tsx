@@ -2,7 +2,6 @@ import { requireAdmin } from '@/lib/user'
 import { createAdminClient } from '@/lib/supabase/admin'
 import ChatBox from '@/app/chat/_components/ChatBox'
 
-// 1. ปรับ Type ของ params ให้เป็น Promise
 export default async function AdminChatPage({
   params,
 }: {
@@ -32,9 +31,11 @@ export default async function AdminChatPage({
         <p className="text-zinc-500 text-sm">{conversation?.users?.email}</p>
       </div>
       <ChatBox
-        conversationId={id} // ใช้ id ที่ await มาแล้ว
+        conversationId={id}
         initialMessages={messages ?? []}
         currentUserId={admin.uid}
+        clientId={conversation?.user_id}   {/* ← ส่ง clientId */}
+        isAdmin={true}                      {/* ← ส่ง isAdmin */}
       />
     </div>
   )
