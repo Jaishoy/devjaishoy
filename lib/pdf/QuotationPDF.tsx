@@ -3,15 +3,15 @@ import { Document, Page, View, Text, StyleSheet, Font } from '@react-pdf/rendere
 import fs from 'fs'
 import path from 'path'
 
-// โหลดฟอนต์จาก lib/fonts และแปลงเป็น .buffer (ArrayBuffer)
+// โหลดฟอนต์เป็น Buffer โดยตรง
 const regularFont = fs.readFileSync(path.join(process.cwd(), 'lib/fonts/Sarabun-Regular.ttf'))
 const boldFont = fs.readFileSync(path.join(process.cwd(), 'lib/fonts/Sarabun-Bold.ttf'))
 
 Font.register({
   family: 'Sarabun',
   fonts: [
-    { data: regularFont.buffer, fontWeight: 400 } as any,
-    { data: boldFont.buffer, fontWeight: 700 } as any,
+    { data: regularFont, fontWeight: 400 } as any,
+    { data: boldFont, fontWeight: 700 } as any,
   ],
 })
 
