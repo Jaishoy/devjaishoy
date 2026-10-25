@@ -1,12 +1,16 @@
 import React from 'react'
 import { Document, Page, View, Text, StyleSheet, Font } from '@react-pdf/renderer'
-import path from 'path'
+import { REGULAR_BASE64, BOLD_BASE64 } from '../fonts/sarabun-data' // แก้ path ตรงนี้เป็น ../fonts/...
+
+// แปลง Base64 กลับเป็น Buffer ในหน่วยความจำ (ปลอดภัย 100% บน Vercel)
+const regularBuffer = Buffer.from(REGULAR_BASE64, 'base64')
+const boldBuffer = Buffer.from(BOLD_BASE64, 'base64')
 
 Font.register({
   family: 'Sarabun',
   fonts: [
-    { src: path.join(process.cwd(), 'public/fonts/Sarabun-Regular.ttf'), fontWeight: 400 },
-    { src: path.join(process.cwd(), 'public/fonts/Sarabun-Bold.ttf'), fontWeight: 700 },
+    { src: regularBuffer as any, fontWeight: 400 },
+    { src: boldBuffer as any, fontWeight: 700 },
   ],
 })
 
