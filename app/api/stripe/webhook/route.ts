@@ -1,7 +1,7 @@
 import { NextResponse, type NextRequest } from 'next/server'
 import { stripe } from '@/lib/stripe'
 import { createAdminClient } from '@/lib/supabase/admin'
-import ReactPDF from '@react-pdf/renderer'
+import { renderToBuffer } from '@react-pdf/renderer'
 import React from 'react'
 import ReceiptPDF, { type ReceiptData } from '@/lib/pdf/ReceiptPDF'
 
@@ -86,7 +86,7 @@ export async function POST(request: NextRequest) {
       total: job.price,
     }
 
-    const pdfBuffer = await ReactPDF.renderToBuffer(
+    const pdfBuffer = await renderToBuffer(
       React.createElement(ReceiptPDF, { data: receiptData }) as any
     )
 

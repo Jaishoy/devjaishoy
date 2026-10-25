@@ -1,7 +1,7 @@
 import { NextResponse, type NextRequest } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
 import { createAdminClient } from '@/lib/supabase/admin'
-import ReactPDF from '@react-pdf/renderer'
+import { renderToBuffer } from '@react-pdf/renderer'
 import React from 'react'
 import QuotationPDF, { type QuotationData } from '@/lib/pdf/QuotationPDF'
 
@@ -120,7 +120,7 @@ export async function POST(request: NextRequest) {
       notes,
     }
 
-    const pdfBuffer = await ReactPDF.renderToBuffer(
+    const pdfBuffer = await renderToBuffer(
       React.createElement(QuotationPDF, { data: pdfData }) as any
     )
 
