@@ -34,8 +34,8 @@ export default async function AdminChatPage({
         conversationId={id}
         initialMessages={messages ?? []}
         currentUserId={admin.uid}
-        clientId={conversation?.user_id}   {/* ← ส่ง clientId */}
-        isAdmin={true}                      {/* ← ส่ง isAdmin */}
+        clientId={conversation?.user_id}
+        isAdmin={true}
       />
     </div>
   )
