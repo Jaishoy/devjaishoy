@@ -121,7 +121,7 @@ export async function POST(request: NextRequest) {
     }
 
     const pdfBuffer = await ReactPDF.renderToBuffer(
-      React.createElement(QuotationPDF, { data: pdfData })
+      React.createElement(QuotationPDF, { data: pdfData }) as any
     )
 
     // Upload PDF ไปที่ Supabase Storage
