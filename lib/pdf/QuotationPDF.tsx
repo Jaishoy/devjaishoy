@@ -1,12 +1,13 @@
 import React from 'react'
 import { Document, Page, View, Text, StyleSheet, Font } from '@react-pdf/renderer'
-import path from 'path'
+
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://devjaishoy.vercel.app'
 
 Font.register({
   family: 'Sarabun',
   fonts: [
-    { src: path.join(process.cwd(), 'public/fonts/Sarabun-Regular.ttf'), fontWeight: 400 },
-    { src: path.join(process.cwd(), 'public/fonts/Sarabun-Bold.ttf'), fontWeight: 700 },
+    { src: `${siteUrl}/fonts/Sarabun-Regular.ttf`, fontWeight: 400 },
+    { src: `${siteUrl}/fonts/Sarabun-Bold.ttf`, fontWeight: 700 },
   ],
 })
 
