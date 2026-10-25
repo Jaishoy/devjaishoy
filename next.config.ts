@@ -12,7 +12,7 @@ const nextConfig: NextConfig = {
     ],
   },
   outputFileTracingIncludes: {
-    '/api/**/*': ['./lib/fonts/**/*'],
+    '/api/**/*': ['./public/fonts/**/*'],
   },
 };
 
