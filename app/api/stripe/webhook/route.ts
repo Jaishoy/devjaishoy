@@ -87,7 +87,7 @@ export async function POST(request: NextRequest) {
     }
 
     const pdfBuffer = await ReactPDF.renderToBuffer(
-      React.createElement(ReceiptPDF, { data: receiptData })
+      React.createElement(ReceiptPDF, { data: receiptData }) as any
     )
 
     // Upload receipt PDF
