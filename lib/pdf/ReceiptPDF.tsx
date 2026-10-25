@@ -10,8 +10,8 @@ const boldFont = fs.readFileSync(path.join(process.cwd(), 'public/fonts/Sarabun-
 Font.register({
   family: 'Sarabun',
   fonts: [
-    { data: regularFont, fontWeight: 400 },
-    { data: boldFont, fontWeight: 700 },
+    { data: regularFont, fontWeight: 400 } as any,
+    { data: boldFont, fontWeight: 700 } as any,
   ],
 })
 
