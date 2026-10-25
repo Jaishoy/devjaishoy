@@ -1,12 +1,17 @@
 import React from 'react'
 import { Document, Page, View, Text, StyleSheet, Font } from '@react-pdf/renderer'
+import fs from 'fs'
 import path from 'path'
+
+// โหลดฟอนต์เป็น Buffer เพื่อฝังลงใน Serverless Function ป้องกันปัญหาหาไฟล์ไม่เจอหรือ Error บน Vercel
+const regularFont = fs.readFileSync(path.join(process.cwd(), 'public/fonts/Sarabun-Regular.ttf'))
+const boldFont = fs.readFileSync(path.join(process.cwd(), 'public/fonts/Sarabun-Bold.ttf'))
 
 Font.register({
   family: 'Sarabun',
   fonts: [
-    { src: path.join(process.cwd(), 'public/fonts/Sarabun-Regular.ttf'), fontWeight: 400 },
-    { src: path.join(process.cwd(), 'public/fonts/Sarabun-Bold.ttf'), fontWeight: 700 },
+    { data: regularFont, fontWeight: 400 },
+    { data: boldFont, fontWeight: 700 },
   ],
 })
 
