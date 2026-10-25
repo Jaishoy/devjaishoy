@@ -32,7 +32,6 @@ export async function POST(
 
     // สร้าง Stripe Checkout Session
     const session = await stripe.checkout.sessions.create({
-      payment_method_types: ['card'],
       mode: 'payment',
       currency: 'thb',
       line_items: job.job_items.map((item: any) => ({
