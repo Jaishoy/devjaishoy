@@ -11,14 +11,6 @@ Font.register({
   ],
 })
 
-Font.register({
-  family: 'Sarabun',
-  fonts: [
-    { src: regularBuffer as any, fontWeight: 400 },
-    { src: boldBuffer as any, fontWeight: 700 },
-  ],
-})
-
 const s = StyleSheet.create({
   page: { fontFamily: 'Sarabun', fontSize: 10, color: '#18181b', backgroundColor: '#fff', padding: 48 },
   header: { flexDirection: 'row', justifyContent: 'space-between', marginBottom: 28, paddingBottom: 20, borderBottomWidth: 1, borderBottomColor: '#e4e4e7' },
