@@ -28,15 +28,21 @@ export async function POST(
 
     await adminClient.from('jobs').update({ status: 'rejected' }).eq('id', id)
 
-    // อัปเดต metadata ของ message quotation
-    await adminClient
+    // อัปเดตสถานะในการ์ดใบเสนอราคา: อ่าน metadata เดิมมาก่อน แล้วเปลี่ยนเฉพาะ status
+    const { data: msg } = await adminClient
       .from('messages')
-      .update({
-        metadata: { ...job, status: 'rejected' }
-      })
+      .select('id, metadata')
       .eq('conversation_id', job.conversation_id)
       .eq('type', 'quotation')
       .contains('metadata', { job_id: id })
+      .maybeSingle()
+
+    if (msg) {
+      await adminClient
+        .from('messages')
+        .update({ metadata: { ...msg.metadata, status: 'rejected' } })
+        .eq('id', msg.id)
+    }
 
     // ส่งข้อความแจ้ง
     await adminClient.from('messages').insert({

@@ -10,7 +10,8 @@ type Props = {
 }
 
 export default function ReceiptCard({ metadata }: Props) {
-  const fmt = (n: number) => `฿${n.toLocaleString('th-TH', { minimumFractionDigits: 2 })}`
+  const fmt = (n?: number | string | null) =>
+  `฿${Number(n ?? 0).toLocaleString('th-TH', { minimumFractionDigits: 2 })}`
 
   return (
     <div className="w-full max-w-sm bg-zinc-900 border border-emerald-900/40 rounded-2xl overflow-hidden">

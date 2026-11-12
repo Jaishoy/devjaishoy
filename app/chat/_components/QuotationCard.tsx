@@ -21,7 +21,8 @@ type Props = {
 export default function QuotationCard({ metadata, isOwnMessage, isAdmin }: Props) {
   const [loading, setLoading] = useState<'approve' | 'reject' | null>(null)
   const [status, setStatus] = useState(metadata.status)
-  const fmt = (n: number) => `฿${n.toLocaleString('th-TH', { minimumFractionDigits: 2 })}`
+  const fmt = (n?: number | string | null) =>
+  `฿${Number(n ?? 0).toLocaleString('th-TH', { minimumFractionDigits: 2 })}`
 
   async function handleAction(action: 'approve' | 'reject') {
     setLoading(action)

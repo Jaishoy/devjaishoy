@@ -12,7 +12,8 @@ type Props = {
 }
 
 export default function PaymentCard({ metadata, isAdmin }: Props) {
-  const fmt = (n: number) => `฿${n.toLocaleString('th-TH', { minimumFractionDigits: 2 })}`
+  const fmt = (n?: number | string | null) =>
+  `฿${Number(n ?? 0).toLocaleString('th-TH', { minimumFractionDigits: 2 })}`
 
   const isPaid = metadata.status === 'paid'
 
