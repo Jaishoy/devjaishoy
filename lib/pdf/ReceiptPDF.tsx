@@ -1,43 +1,34 @@
 import React from 'react'
-import { Document, Page, View, Text, StyleSheet, Font } from '@react-pdf/renderer'
-import { REGULAR_BASE64, BOLD_BASE64 } from '../fonts/sarabun-data'
-
-// กำหนดค่าเป็น Data URI String แบบเต็ม เพื่อให้ส่งเข้าไปเป็น String (แก้ปัญหา substring)
-Font.register({
-  family: 'Sarabun',
-  fonts: [
-    { src: `data:font/ttf;base64,${REGULAR_BASE64}`, fontWeight: 400 },
-    { src: `data:font/ttf;base64,${BOLD_BASE64}`, fontWeight: 700 },
-  ],
-})
+import { Document, Page, View, StyleSheet } from '@react-pdf/renderer'
+import { Text } from './PdfText' // ← wrapper ที่ลงทะเบียนฟอนต์ + แก้ข้อความไทยให้อัตโนมัติ
 
 const s = StyleSheet.create({
-  page: { fontFamily: 'Sarabun', fontSize: 10, color: '#18181b', backgroundColor: '#fff', padding: 48 },
-  header: { flexDirection: 'row', justifyContent: 'space-between', marginBottom: 28, paddingBottom: 20, borderBottomWidth: 1, borderBottomColor: '#e4e4e7' },
+  page: { fontFamily: 'Sarabun', fontSize: 10, color: '#18181b', backgroundColor: '#fff', padding: 48, paddingBottom: 80 },
+  header: { flexDirection: 'row', justifyContent: 'space-between', marginBottom: 20, paddingBottom: 14, borderBottomWidth: 1, borderBottomColor: '#e4e4e7' },
   brandName: { fontSize: 18, fontWeight: 700, color: '#09090b', marginBottom: 3 },
   brandSub: { fontSize: 9, color: '#71717a' },
   docTitle: { fontSize: 22, fontWeight: 700, color: '#09090b', textAlign: 'right', marginBottom: 3 },
   docNo: { fontSize: 9, color: '#71717a', textAlign: 'right' },
   confirmedBadge: { backgroundColor: '#166534', borderRadius: 4, padding: '4 10', alignSelf: 'flex-end', marginBottom: 4 },
   confirmedText: { fontSize: 8, fontWeight: 700, color: '#fff' },
-  parties: { flexDirection: 'row', gap: 24, marginBottom: 24 },
+  parties: { flexDirection: 'row', gap: 24, marginBottom: 16 },
   partyBox: { flex: 1, backgroundColor: '#f4f4f5', borderRadius: 6, padding: 12 },
-  partyLabel: { fontSize: 8, fontWeight: 700, color: '#71717a', marginBottom: 8, textTransform: 'uppercase', letterSpacing: 1 },
+  partyLabel: { fontSize: 8, fontWeight: 700, color: '#71717a', marginBottom: 8, textTransform: 'uppercase', letterSpacing: 0 },
   partyName: { fontSize: 11, fontWeight: 700, color: '#09090b', marginBottom: 3 },
   partyText: { fontSize: 9, color: '#52525b', marginBottom: 2 },
   paymentBox: { backgroundColor: '#f0fdf4', borderRadius: 6, padding: 12, marginBottom: 20, borderWidth: 1, borderColor: '#bbf7d0' },
-  paymentLabel: { fontSize: 8, fontWeight: 700, color: '#166534', marginBottom: 8, textTransform: 'uppercase', letterSpacing: 1 },
+  paymentLabel: { fontSize: 8, fontWeight: 700, color: '#166534', marginBottom: 8, textTransform: 'uppercase', letterSpacing: 0 },
   paymentRow: { flexDirection: 'row', gap: 24 },
   paymentItem: { flex: 1 },
   paymentKey: { fontSize: 8, color: '#4b7c5e', marginBottom: 2 },
   paymentVal: { fontSize: 10, fontWeight: 700, color: '#14532d' },
-  tableLabel: { fontSize: 8, fontWeight: 700, color: '#71717a', marginBottom: 6, textTransform: 'uppercase', letterSpacing: 1 },
+  tableLabel: { fontSize: 8, fontWeight: 700, color: '#71717a', marginBottom: 6, textTransform: 'uppercase', letterSpacing: 0 },
   tableHead: { flexDirection: 'row', backgroundColor: '#09090b', borderRadius: 4, padding: '7 10', marginBottom: 3 },
   tableHeadTxt: { fontSize: 8, fontWeight: 700, color: '#fff' },
-  tableRow: { flexDirection: 'row', padding: '8 10', borderBottomWidth: 1, borderBottomColor: '#f4f4f5' },
+  tableRow: { flexDirection: 'row', padding: '6 10', borderBottomWidth: 1, borderBottomColor: '#f4f4f5' },
   tableCell: { fontSize: 10, color: '#3f3f46' },
   cDesc: { flex: 3 }, cQty: { flex: 1, textAlign: 'center' }, cUnit: { flex: 1.5, textAlign: 'right' }, cAmt: { flex: 1.5, textAlign: 'right' },
-  totalSection: { alignItems: 'flex-end', marginTop: 8, marginBottom: 20 },
+  totalSection: { alignItems: 'flex-end', marginTop: 6, marginBottom: 14 },
   totalBox: { backgroundColor: '#09090b', borderRadius: 6, padding: '10 16', flexDirection: 'row', gap: 32, minWidth: 200 },
   totalLabel: { fontSize: 11, fontWeight: 700, color: '#fff' },
   totalValue: { fontSize: 11, fontWeight: 700, color: '#fff', textAlign: 'right', flex: 1 },
@@ -76,7 +67,8 @@ export default function ReceiptPDF({ data }: { data: ReceiptData }) {
           </View>
           <View>
             <View style={s.confirmedBadge}>
-              <Text style={s.confirmedText}>✓ ชำระเงินแล้ว</Text>
+              {/* ตัด "✓" ออก: ฟอนต์ Sarabun ไม่มี glyph นี้ */}
+              <Text style={s.confirmedText}>ชำระเงินแล้ว</Text>
             </View>
             <Text style={s.docTitle}>ใบเสร็จรับเงิน</Text>
             <Text style={s.docNo}>เลขที่: {data.receiptNo}</Text>
@@ -149,8 +141,8 @@ export default function ReceiptPDF({ data }: { data: ReceiptData }) {
           </View>
         </View>
 
-        {/* Thank you */}
-        <Text style={s.thankYou}>ขอบคุณที่ไว้วางใจครับ 🙏</Text>
+        {/* Thank you — ตัด emoji ออก: Sarabun ไม่มี glyph */}
+        <Text style={s.thankYou}>ขอบคุณที่ไว้วางใจครับ</Text>
         <Text style={s.thankYouSub}>หากมีคำถามเพิ่มเติม ติดต่อได้ที่ {data.freelancer.email}</Text>
 
         {/* Footer */}
